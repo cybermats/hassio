@@ -1,0 +1,7 @@
+inhabitants:
+    name: Inhabitants
+    view: yes
+    entities:
+     - device_tracker.galaxys8
+     - device_tracker.matssiphone
+  

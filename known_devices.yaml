@@ -1,0 +1,162 @@
+
+matssiphone:
+  hide_if_away: false
+  icon:
+  mac: 38:71:DE:AD:D2:4F
+  name: Matss-iPhone
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+galaxys8:
+  hide_if_away: false
+  icon:
+  mac: 30:07:4D:F6:F1:62
+  name: Galaxy-S8
+  picture:
+  track: true
+  vendor: unknown
+
+2c7e81833b68:
+  hide_if_away: false
+  icon:
+  mac: 2C:7E:81:83:3B:68
+  name: 2c7e81833b68
+  picture:
+  track: false
+  vendor: ARRIS Group, Inc.
+
+matsmint:
+  hide_if_away: false
+  icon:
+  mac: BC:EE:7B:78:E5:1F
+  name: mats-mint
+  picture:
+  track: false
+  vendor: ASUSTek COMPUTER INC.
+
+matssmacmini:
+  hide_if_away: false
+  icon:
+  mac: AC:87:A3:37:01:8C
+  name: Matss-Mac-mini
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+703acb8efe11:
+  hide_if_away: false
+  icon:
+  mac: 70:3A:CB:8E:FE:11
+  name: 703acb8efe11
+  picture:
+  track: false
+  vendor: Google, Inc.
+
+livingroom:
+  hide_if_away: false
+  icon:
+  mac: 90:56:82:7F:66:94
+  name: LivingRoom
+  picture:
+  track: false
+  vendor: Lenbrook Industries Limited
+
+matssair:
+  hide_if_away: false
+  icon:
+  mac: 7C:D1:C3:F7:B9:31
+  name: Matss-Air
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+mikaelsiphone:
+  hide_if_away: false
+  icon:
+  mac: E0:5F:45:20:85:D8
+  name: Mikaels-iPhone
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+sevenofnine:
+  hide_if_away: false
+  icon:
+  mac: D0:57:7B:A3:47:F6
+  name: sevenofnine
+  picture:
+  track: false
+  vendor: Intel Corporate
+
+philipshue:
+  hide_if_away: false
+  icon:
+  mac: 00:17:88:61:B0:EF
+  name: Philips-hue
+  picture:
+  track: false
+  vendor: Philips Lighting BV
+
+torrentbox:
+  hide_if_away: false
+  icon:
+  mac: 08:00:27:76:E6:39
+  name: torrentbox
+  picture:
+  track: false
+  vendor: PCS Systemtechnik GmbH
+
+c0ffd4882f02:
+  hide_if_away: false
+  icon:
+  mac: C0:FF:D4:88:2F:02
+  name: c0ffd4882f02
+  picture:
+  track: false
+  vendor: NETGEAR
+
+101b549aa890:
+  hide_if_away: false
+  icon:
+  mac: 10:1B:54:9A:A8:90
+  name: 101b549aa890
+  picture:
+  track: false
+  vendor: HUAWEI TECHNOLOGIES CO.,LTD
+
+ubuntuserver:
+  hide_if_away: false
+  icon:
+  mac: 2C:4D:54:D5:82:DE
+  name: ubuntuserver
+  picture:
+  track: false
+  vendor: ASUSTek COMPUTER INC.
+
+sevenofnine_2:
+  hide_if_away: false
+  icon:
+  mac: 54:04:A6:EF:B1:13
+  name: sevenofnine
+  picture:
+  track: false
+  vendor: ASUSTek COMPUTER INC.
+
+00a742310583:
+  hide_if_away: false
+  icon:
+  mac: 00:A7:42:31:05:83
+  name: 00a742310583
+  picture:
+  track: false
+  vendor: Cisco Systems, Inc
+
+tv:
+  hide_if_away: false
+  icon:
+  mac: 14:C9:13:91:40:A8
+  name: LGwebOSTV
+  picture:
+  track: false
+  vendor: LG Electronics
