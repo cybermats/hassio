@@ -1,160 +1,176 @@
- - alias: 'Everyone has left'
-   trigger:
-    - platform: state
-      entity_id: group.inhabitants
-      to: 'not_home'
-   action:
-    - service: light.turn_off
-      data:
-        entity_id: light.living_room
-    - service: media_player.media_pause
-      data:
-        entity_id: media_player.living_room
+- alias: 'Everyone has left'
+  trigger:
+  - platform: state
+    entity_id: group.inhabitants
+    to: 'not_home'
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.living_room
+  - service: media_player.media_pause
+    data:
+      entity_id: media_player.living_room
 
- - alias: 'TV On'
-   trigger:
-    - platform: state
-      entity_id: media_player.living_room_tv
-      from: 'off'
-   action:
-    - service: media_player.select_source
-      data:
-         entity_id: media_player.living_room
-         source: 'Optisk källa'
+- alias: 'TV On'
+  trigger:
+  - platform: state
+    entity_id: media_player.living_room_tv
+    from: 'off'
+  action:
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.living_room
+      source: 'Optisk källa'
 
- - alias: 'TV On Sunset'
-   trigger:
-    - platform: state
-      entity_id: media_player.living_room_tv
-      from: 'off'
-   condition:
+- alias: 'TV On Sunset'
+  trigger:
+  - platform: state
+    entity_id: media_player.living_room_tv
+    from: 'off'
+  condition:
+  - condition: sun
+    after: sunset
+    after_offset: '-1:00:00'
+  action:
+  - service: light.hue_activate_scene
+    data:
+      group_name: 'Living room'
+      scene_name: 'Dimmed'
+
+- alias: 'TV Off Sunset'
+  trigger:
+  - platform: state
+    entity_id: media_player.living_room_tv
+    to: 'off'
+  condition:
+    condition: and
+    conditions:
     - condition: sun
       after: sunset
       after_offset: '-1:00:00'
-   action:
-    - service: light.hue_activate_scene
-      data:
-        group_name: 'Living room'
-        scene_name: 'Dimmed'
-
- - alias: 'TV Off Sunset'
-   trigger:
-    - platform: state
-      entity_id: media_player.living_room_tv
-      to: 'off'
-   condition:
-     condition: and
-     conditions:
-     - condition: sun
-       after: sunset
-       after_offset: '-1:00:00'
-     - condition: time
-       after: '12:00:00'
-       before: '02:00:00'
-   action:
-   - service: light.hue_activate_scene
-     data:
-       group_name: 'Living room'
-       scene_name: 'Bright'
+    - condition: time
+      after: '12:00:00'
+      before: '02:00:00'
+  action:
+  - service: light.hue_activate_scene
+    data:
+      group_name: 'Living room'
+      scene_name: 'Bright'
 
 
- - alias: 'Sun set'
-   trigger:
-   - platform: sun
-     event: sunset
-     offset: '-01:00:00'
-   condition:
-     condition: state
-     entity_id: group.inhabitants
-     state: home
-   action:
-     service: light.hue_activate_scene
-     data:
-       group_name: 'Living room'
-       scene_name: 'Bright'
+- alias: 'Sun set'
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-01:00:00'
+  condition:
+    condition: state
+    entity_id: group.inhabitants
+    state: home
+  action:
+    service: light.hue_activate_scene
+    data:
+      group_name: 'Living room'
+      scene_name: 'Bright'
 
- - alias: 'Coming home'
-   trigger:
+- alias: 'Coming home'
+  trigger:
     platform: state
     entity_id: group.inhabitants
     to: home
-   condition:
+  condition:
     condition: sun
     after: sunset
     after_offset: '-1:00:00'
-   action:
-     service: light.hue_activate_scene
-     data:
-       group_name: 'Living room'
-       scene_name: 'Bright'
+  action:
+    service: light.hue_activate_scene
+    data:
+      group_name: 'Living room'
+      scene_name: 'Bright'
     
- - alias: 'Weekday dim'
-   trigger:
-     platform: time
-     at: '23:30:00'
-   condition:
-   - condition: time
-     weekday:
-     - sun
-     - mon
-     - tue
-     - wed
-     - thu
-   - condition: state
-     entity_id: group.inhabitants
-     state: home
-   - condition: sun
-     after: sunset
-     after_offset: '-1:00:00'
-   action:
-     service: light.turn_on
-     data:
-       profile: 'dimmed'
-       entity_id: light.living_room
-       transition: 60
+- alias: 'Weekday dim'
+  trigger:
+    platform: time
+    at: '23:30:00'
+  condition:
+  - condition: time
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+  - condition: state
+    entity_id: group.inhabitants
+    state: home
+  - condition: sun
+    after: sunset
+    after_offset: '-1:00:00'
+  action:
+    service: light.turn_on
+    data:
+      profile: 'dimmed'
+      entity_id: light.living_room
+      transition: 60
 
- - alias: 'Weekday night'
-   trigger:
-     platform: time
-     at: '00:30:00'
-   condition:
-   - condition: time
-     weekday:
-     - mon
-     - tue
-     - wed
-     - thu
-     - fri
-   action:
-   - service: light.turn_off
-     data:
-       transition: 10
-   - service: media_player.media_pause
-     data:
-       entity_id: media_player.living_room
+- alias: 'Weekday night'
+  trigger:
+    platform: time
+    at: '00:30:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: light.turn_off
+    data:
+      transition: 10
+  - service: media_player.media_pause
+    data:
+      entity_id: media_player.living_room
 
 
- - alias: 'Weekday morning'
-   trigger:
-     platform: time
-     at: '07:30:00'
-   condition:
-   - condition: time
-     weekday
-     - mon
-     - tue
-     - wed
-     - thu
-     - fri
-   - condition: sun
-     before: sunrise
-   - condition: state
-     entity_id: group.inhabitants
-     state: home
-   action:
-     service: light.turn_on
-     data:
-       profile: 'bright'
-       entity_id: light.living_room
-       transition: 60
+- alias: 'Weekday morning Off'
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: '+01:00:00'
+  condition:
+  - condition: state
+    entity_id: group.inhabitants
+    state: home
+  action:
+  - service: light.turn_off
+    data:
+      transition: 600
+    
+    
+
+- alias: 'Weekday morning On'
+  trigger:
+    platform: time
+    at: '07:30:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: sun
+    before: sunrise
+  - condition: state
+    entity_id: group.inhabitants
+    state: home
+  action:
+    service: light.turn_on
+    data:
+      profile: 'bright'
+      entity_id: light.living_room
+      transition: 60
 
