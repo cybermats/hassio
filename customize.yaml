@@ -1,0 +1,4 @@
+sensor.the_alarm_clock:
+  hidden: true
+media_player.living_room:
+  friendly_name: BlueSound

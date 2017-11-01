@@ -55,7 +55,12 @@ sun:
 # Weather prediction
 sensor:
   - platform: yr
+  - platform: mqtt
+    name: 'The Alarm Clock'
+    state_topic: "cybermats/alarm-clock"
+    unit_of_measurement: 'minutes'
 
+    
 # Text to speech
 #tts:
 #  - platform: google
@@ -66,7 +71,7 @@ script: !include scripts.yaml
 
 light:
  - platform: hue
-   host: 192.168.1.36
+   host: Philips-hue
 
 
 device_tracker:
@@ -78,5 +83,12 @@ device_tracker:
 
 media_player:
  - platform: webostv
-   host: 192.168.1.4
+   host: LGWebOSTV
    name: Living Room TV
+
+mqtt:
+  broker: ubuntuserver
+
+zwave:
+  network_key:
+    "0xA1, 0x69, 0xFC, 0xCD, 0x67, 0x76, 0x8F, 0xAB, 0x7E, 0x0F, 0xBB, 0xC4, 0x0A, 0x28, 0xF5, 0x6A"
