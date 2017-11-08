@@ -67,10 +67,14 @@
     entity_id: group.inhabitants
     state: home
   action:
-    service: light.hue_activate_scene
+  - service: light.hue_activate_scene
     data:
       group_name: Living room
       scene_name: Bright
+  - service: light.turn_on
+    data:
+      entity_id: light.arbetsrum_taklampa_dimmer_level
+      brightness: 255
 - alias: Coming home
   id: coming_home
   trigger:
@@ -106,11 +110,18 @@
     after: sunset
     after_offset: '-1:00:00'
   action:
-    service: light.turn_on
+  - service: light.turn_on
     data:
       profile: dimmed
       entity_id: light.living_room
       transition: 60
+  - service: light.turn_on
+    data:
+      entity_id: light.arbetsrum_taklampa_dimmer_level
+      brightness: 127
+  - service: cover.close_cover
+    data:
+      entity_id: cover.sovrum_gardin_level
 - alias: Weekday night
   id: weekday_night
   trigger:
@@ -212,6 +223,57 @@
       brightness: '255'
       entity_id: light.bedroom
       kelvin: '2000'
-      transition: 180
+      transition: 10
     service: light.turn_on
+  - service: cover.open_cover
+    data:
+      entity_id: cover.sovrum_gardin_level
+- alias: Door Opens
+  id: door_opens
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ytterdorr_sensor
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: group.inhabitants
+      state: not_home
+    - condition: state
+      entity_id: group.all_lights
+      state: 'off'
+    - condition: or
+      conditions:
+      - condition: sun
+        after: sunset
+        after_offset: '-1:00:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '1:00:00'
+  action:
+  - data: {}
+    service: light.turn_on
+- alias: "Balkong ljusslinga On"
+  id: balkong_ljusslinga
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: -01:00:00
+  action:
+    service: light.turn_on
+    entity_id: light.balkong_light
+- alias: "Balkong ljusslinga Off"
+  id: balkong_ljusslinga
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: 01:00:00
+  action:
+    service: light.turn_off
+    entity_id: light.balkong_light
+    
+        
+    
+    
       

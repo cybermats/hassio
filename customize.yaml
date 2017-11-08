@@ -2,3 +2,48 @@ sensor.the_alarm_clock:
   hidden: true
 media_player.living_room:
   friendly_name: BlueSound
+sensor.arbetsrum_taklampa_dimmer_alarm_level:
+  hidden: true
+sensor.arbetsrum_taklampa_dimmer_alarm_type:
+  hidden: true
+sensor.arbetsrum_taklampa_dimmer_exporting:
+  hidden: true
+sensor.arbetsrum_taklampa_dimmer_sourcenodeid:
+  hidden: true
+switch.arbetsrum_taklampa_dimmer_switch:
+  hidden: true
+sensor.ytterdorr_alarm_level:
+  hidden: true
+sensor.ytterdorr_alarm_type:
+  hidden: true
+sensor.ytterdorr_sourcenodeid:
+  hidden: true
+sensor.ytterdorr_burglar:
+  hidden: true
+switch.balkong_ljusslinga_switch_switch:
+  hidden: true
+switch.vardagsrum_switch_switch:
+  hidden: true
+light.all_hue_lights:
+  hidden: true
+light.sovrum_tak_1:
+  hidden: true
+light.sovrum_tak_2:
+  hidden: true
+light.sovrum_tak_3:
+  hidden: true
+light.bokhyllan_hoger:
+  hidden: true
+light.bokhyllan_vanster:
+  hidden: true
+light.bredvid_soffan:
+  hidden: true
+light.bedroom:
+  friendly_name: "Sovrum"
+light.living_room:
+  friendly_name: "Vardagsrum"
+switch.sovrum_gardin_switch:
+  hidden: true
+cover.sovrum_gardin_switch:
+  hidden: true
+  

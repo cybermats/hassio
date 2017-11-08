@@ -72,6 +72,28 @@ script: !include scripts.yaml
 light:
  - platform: hue
    host: Philips-hue
+ - platform: template
+   lights:
+     balkong_light:
+       friendly_name: "Balkong ljusslinga"
+       turn_on:
+         service: switch.turn_on
+         entity_id: switch.balkong_ljusslinga_switch_switch
+       turn_off:
+         service: switch.turn_off
+         entity_id: switch.balkong_ljusslinga_switch_switch
+       value_template:
+         "{{ is_state('switch.balkong_ljusslinga_switch_switch', 'on') }}"
+     living_room_switch_light:
+       friendly_name: "Vardagsrum switch"
+       turn_on:
+         service: switch.turn_on
+         entity_id: switch.vardagsrum_switch_switch
+       turn_off:
+         service: switch.turn_off
+         entity_id: switch.vardagsrum_switch_switch
+       value_template:
+         "{{ is_state('switch.vardagsrum_switch_switch', 'on') }}"
 
 
 device_tracker:
@@ -92,3 +114,6 @@ mqtt:
 zwave:
   network_key:
     "0xA1, 0x69, 0xFC, 0xCD, 0x67, 0x76, 0x8F, 0xAB, 0x7E, 0x0F, 0xBB, 0xC4, 0x0A, 0x28, 0xF5, 0x6A"
+
+ios:
+

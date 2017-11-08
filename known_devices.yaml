@@ -215,3 +215,21 @@ f09fc2c5d901:
   picture:
   track: false
   vendor: Ubiquiti Networks Inc.
+
+d2f4fb879451:
+  hide_if_away: false
+  icon:
+  mac: D2:F4:FB:87:94:51
+  name: d2f4fb879451
+  picture:
+  track: false
+  vendor: unknown
+
+lgwebostv:
+  hide_if_away: false
+  icon:
+  mac: 30:A9:DE:82:CF:CE
+  name: LGwebOSTV
+  picture:
+  track: false
+  vendor: LG Innotek
