@@ -272,6 +272,21 @@
   action:
     service: light.turn_off
     entity_id: light.balkong_light
+- alias: Door Opens Notification
+  id: door_opens
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.ytterdorr_sensor
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.inhabitants
+    state: not_home
+  action:
+  - service: notify.notify
+    data:
+      message: "Door opened at home."
+      
     
         
     
