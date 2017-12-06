@@ -18,3 +18,5 @@ secrets.yaml
 OZW_Log.txt
 *.sqlite
 known_devices.yaml
+
+*.xml
