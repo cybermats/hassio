@@ -101,3 +101,16 @@ hall:
     - light.hall_hoger
     - light.hall_vanster
 
+scripts:
+  name: Scripts
+  view: yes
+  entities:
+    - script.good_night
+    - script.dim_study
+    - script.dim_hallway
+    - script.dim_livingroom
+    - script.dim_kitchen
+    - script.dim_diningarea
+    - script.dim_bedroom
+    - script.dim_apartment
+    - script.light_up_apartment
