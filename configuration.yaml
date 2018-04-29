@@ -27,6 +27,8 @@ http:
   # api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
+  ssl_certificate: /etc/letsencrypt/live/gurkautomat.com/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/gurkautomat.com/privkey.pem
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -53,12 +55,72 @@ logbook:
 sun:
 
 # Weather prediction
-sensor:
-  - platform: yr
-  - platform: mqtt
-    name: 'The Alarm Clock'
-    state_topic: "cybermats/alarm-clock"
-    unit_of_measurement: 'minutes'
+sensor: !include sensors.yaml
+
+
+binary_sensor:
+ - platform: template
+   sensors:
+     bed_mats_occupied:
+       friendly_name: "Bed Mats is occupied"
+       value_template: "{{ states('sensor.bed_mats')|float > 500 }}"
+       device_class: occupancy
+ - platform: template
+   sensors:
+     bed_mikael_occupied:
+       friendly_name: "Bed Mikael is occupied"
+       value_template: "{{ states('sensor.bed_mikael')|float > 500 }}"
+       device_class: occupancy
+ - platform: template
+   sensors:
+     everyone_in_bed:
+       friendly_name: "Everyone at home is in bed"
+       device_class: occupancy
+       entity_id:
+        - binary_sensor.mats
+        - binary_sensor.mikael
+        - binary_sensor.bed_mikael_occupied
+        - binary_sensor.bed_mats_occupied
+       value_template: >-
+         {{ 
+            (
+             is_state('binary_sensor.mats', 'off') 
+            and 
+             is_state('binary_sensor.mikael', 'on') 
+            and 
+             is_state('binary_sensor.bed_mikael_occupied', 'on') 
+            )
+           or
+            (
+             is_state('binary_sensor.mats', 'on') 
+            and 
+             is_state('binary_sensor.bed_mats_occupied', 'on') 
+            and 
+             is_state('binary_sensor.mikael', 'off') 
+            )
+           or
+            (
+             is_state('binary_sensor.mats', 'on') 
+            and 
+             is_state('binary_sensor.bed_mats_occupied', 'on') 
+            and 
+             is_state('binary_sensor.mikael', 'on') 
+            and 
+             is_state('binary_sensor.bed_mikael_occupied', 'on') 
+            )
+          }}
+ - platform: template
+   sensors:
+     mats:
+       friendly_name: "Mats"
+       device_class: presence
+       value_template: "{{ is_state('device_tracker.matspixel2', 'home') }}"
+ - platform: template
+   sensors:
+     mikael:
+       friendly_name: "Mikael"
+       device_class: presence
+       value_template: "{{ is_state('device_tracker.galaxys8', 'home') }}"
 
     
 # Text to speech

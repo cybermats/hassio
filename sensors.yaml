@@ -1,0 +1,15 @@
+  - platform: yr
+  - platform: mqtt
+    name: 'The Alarm Clock'
+    state_topic: "cybermats/alarm-clock"
+    unit_of_measurement: 'minutes'
+  - platform: mqtt
+    state_topic: "sensor/bedpressure"
+    name: 'Bed Mats'
+    value_template: '{{ value_json.data[0] }}'
+    unit_of_measurement: "%"
+  - platform: mqtt
+    state_topic: "sensor/bedpressure"
+    name: 'Bed Mikael'
+    value_template: '{{ value_json.data[1] }}'
+    unit_of_measurement: "%"

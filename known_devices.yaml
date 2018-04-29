@@ -233,3 +233,155 @@ lgwebostv:
   picture:
   track: false
   vendor: LG Innotek
+
+matssipad:
+  hide_if_away: false
+  icon:
+  mac: 84:78:8B:72:3C:48
+  name: Matss-iPad
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+android2ef6682f33758e75:
+  hide_if_away: false
+  icon:
+  mac: 7C:F9:0E:38:3B:4C
+  name: android-2ef6682f33758e75
+  picture:
+  track: false
+  vendor: unknown
+
+uffesiphonex:
+  hide_if_away: false
+  icon:
+  mac: 40:98:AD:36:54:58
+  name: Uffes-iPhone-X
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+matspixel2:
+  hide_if_away: false
+  icon:
+  mac: 40:4E:36:88:05:47
+  name: Mats Pixel 2
+  picture:
+  track: true
+  vendor: HTC Corporation
+
+therookie:
+  hide_if_away: false
+  icon:
+  mac: 54:AE:27:99:55:10
+  name: therookie
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+ipad:
+  hide_if_away: false
+  icon:
+  mac: 34:E2:FD:D9:5E:71
+  name: iPad
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+f0a22570cb72:
+  hide_if_away: false
+  icon:
+  mac: F0:A2:25:70:CB:72
+  name: f0a22570cb72
+  picture:
+  track: false
+  vendor: unknown
+
+idastuffalur:
+  hide_if_away: false
+  icon:
+  mac: 24:F0:94:7D:32:9B
+  name: Idas-tuffa-lur
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+cherylykiiphone:
+  hide_if_away: false
+  icon:
+  mac: 58:40:4E:B8:E2:63
+  name: CherylykiiPhone
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+ac3743de94f5:
+  hide_if_away: false
+  icon:
+  mac: AC:37:43:DE:94:F5
+  name: ac3743de94f5
+  picture:
+  track: false
+  vendor: HTC Corporation
+
+soellphone:
+  hide_if_away: false
+  icon:
+  mac: D4:A3:3D:AA:F1:D1
+  name: soellphone
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+00a742310582:
+  hide_if_away: false
+  icon:
+  mac: 00:A7:42:31:05:82
+  name: 00a742310582
+  picture:
+  track: false
+  vendor: unknown
+
+a8cb83e97cd1:
+  hide_if_away: false
+  icon:
+  mac: A8:CB:83:E9:7C:D1
+  name: a8cb83e97cd1
+  picture:
+  track: false
+  vendor: unknown
+
+d8616215d74f:
+  hide_if_away: false
+  icon:
+  mac: D8:61:62:15:D7:4F
+  name: d8616215d74f
+  picture:
+  track: false
+  vendor: Wistron Neweb Corporation
+
+pulsemini2b3b:
+  hide_if_away: false
+  icon:
+  mac: 90:56:82:AF:2B:3B
+  name: PULSEMINI-2B3B
+  picture:
+  track: false
+  vendor: Lenbrook Industries Limited
+
+sofiasiphone:
+  hide_if_away: false
+  icon:
+  mac: 18:F6:43:6A:2D:E6
+  name: Sofias-iPhone
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+chromecast_ultra:
+  hide_if_away: false
+  icon:
+  mac: 44:09:B8:4F:96:A9
+  name: Chromecast Ultra
+  picture:
+  track: false
