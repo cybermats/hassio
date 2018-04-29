@@ -1,0 +1,6 @@
+good_night:
+  alias: Good night
+  sequence:
+  - data: {}
+    service: light.turn_off
+  - service: media_player.media_pause
