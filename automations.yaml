@@ -20,7 +20,7 @@
   - service: media_player.select_source
     data:
       entity_id: media_player.living_room
-      source: "Optisk k\xE4lla"
+      source: Optisk källa
 - alias: TV On Sunset
   id: tv_on_sunset
   trigger:
@@ -32,7 +32,7 @@
     after: sunset
     after_offset: '-1:00:00'
   action:
-  - service: light.hue_activate_scene
+  - service: hue.hue_activate_scene
     data:
       group_name: Living room
       scene_name: Dimmed
@@ -52,7 +52,7 @@
       after: '12:00:00'
       before: 02:00:00
   action:
-  - service: light.hue_activate_scene
+  - service: hue.hue_activate_scene
     data:
       group_name: Living room
       scene_name: Bright
@@ -67,29 +67,7 @@
     entity_id: group.inhabitants
     state: home
   action:
-  - service: light.hue_activate_scene
-    data:
-      group_name: Living room
-      scene_name: Bright
-  - service: light.turn_on
-    data:
-      entity_id: light.arbetsrum_taklampa_dimmer_level
-      brightness: 255
-- alias: Coming home
-  id: coming_home
-  trigger:
-    platform: state
-    entity_id: group.inhabitants
-    to: home
-  condition:
-    condition: sun
-    after: sunset
-    after_offset: '-1:00:00'
-  action:
-    service: light.hue_activate_scene
-    data:
-      group_name: Living room
-      scene_name: Bright
+  - service: script.light_up_apartment
 - alias: Weekday dim
   id: weekday_dim
   trigger:
@@ -110,15 +88,7 @@
     after: sunset
     after_offset: '-1:00:00'
   action:
-  - service: light.turn_on
-    data:
-      profile: dimmed
-      entity_id: light.living_room
-      transition: 60
-  - service: light.turn_on
-    data:
-      entity_id: light.arbetsrum_taklampa_dimmer_level
-      brightness: 33
+  - service: script.dim_apartment
   - service: cover.close_cover
     data:
       entity_id: cover.sovrum_gardin_level
@@ -154,39 +124,8 @@
     state: home
   action:
   - service: light.turn_off
-    data:
-      transition: 600
-- alias: Weekday morning On
-  id: weekday_morning_on
-  trigger:
-    platform: time
-    at: 07:30:00
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  - condition: sun
-    before: sunrise
-  - condition: state
-    entity_id: group.inhabitants
-    state: home
-  action:
-  - service: light.turn_on
-    data:
-      profile: bright
-      entity_id: light.living_room
-      transition: 60
-  - service: light.turn_on
-    data:
-      entity_id: light.koksbank_dimmer_level
-      brightness: 255
-      
 - alias: Wake up
-  id: '1509303589195'
+  id: wake_up
   trigger:
   - at: '7:30'
     platform: time
@@ -215,13 +154,12 @@
       minutes: 5
   - service: light.turn_on
     data:
-      entity_id: light.sovrum_dimmer_level
-      brightness: 255
-  - service: light.turn_on
-    data:
-      entity_id: light.hall_dimmer_level
-      brightness: 255
-      
+      entity_id:
+      - light.sovrum_dimmer_level
+      - light.hall_dimmer_level
+      - light.koksbank_dimmer_level
+      - light.living_room
+      profile: bright
 - alias: Door Opens
   id: door_opens
   trigger:
@@ -237,7 +175,7 @@
       for:
         minutes: 10
     - condition: state
-      entity_id: group.all_lights
+      entity_id: group.alla_lampor
       state: 'off'
     - condition: or
       conditions:
@@ -248,9 +186,32 @@
         before: sunrise
         before_offset: '1:00:00'
   action:
-  - data: {}
-    service: light.turn_on
-- alias: "Balkong ljusslinga On"
+  - service: script.light_up_apartment
+    
+- alias: We are home
+  id: coming_home
+  trigger:
+  - platform: state
+    entity_id: group.inhabitants
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: group.alla_lampor
+      state: 'off'
+    - condition: or
+      conditions:
+      - condition: sun
+        after: sunset
+        after_offset: '-1:00:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '1:00:00'
+  action:
+  - service: script.light_up_apartment
+    
+- alias: Balkong ljusslinga On
   id: balkong_ljusslinga
   trigger:
   - platform: sun
@@ -259,7 +220,7 @@
   action:
     service: light.turn_on
     entity_id: light.balkong_light
-- alias: "Balkong ljusslinga Off"
+- alias: Balkong ljusslinga Off
   id: balkong_ljusslinga
   trigger:
   - platform: sun
@@ -268,23 +229,36 @@
   action:
     service: light.turn_off
     entity_id: light.balkong_light
-- alias: Door Opens Notification
-  id: door_opens_notification
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.ytterdorr_sensor
-    to: 'on'
+- action:
+  - service: cover.close_cover
+  - data: {}
+    service: script.good_night
+  alias: Going To Bed
   condition:
+  - after: '21:00'
+    before: '6:00'
+    condition: time
+  id: going_to_bed
+  trigger:
+  - entity_id: binary_sensor.everyone_in_bed
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id: light.hall_dimmer_level
+      profile: dimmed
+    service: light.turn_on
+  alias: Night light
+  condition:
+  - after: '0:30'
+    before: '6:00'
+    condition: time
   - condition: state
-    entity_id: group.inhabitants
-    state: not_home
-  action:
-  - service: notify.notify
-    data:
-      message: "Door opened at home."
-      
-    
-        
-    
-    
-      
+    entity_id: light.hall_dimmer_level
+    state: 'off'
+  id: '1525009433643'
+  trigger:
+  - entity_id: binary_sensor.everyone_in_bed
+    from: 'on'
+    platform: state
+    to: 'off'
