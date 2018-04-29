@@ -1,5 +1,3 @@
-sensor.the_alarm_clock:
-  hidden: true
 media_player.living_room:
   friendly_name: BlueSound
 sensor.arbetsrum_taklampa_dimmer_alarm_level:
@@ -46,4 +44,67 @@ switch.sovrum_gardin_switch:
   hidden: true
 cover.sovrum_gardin_switch:
   hidden: true
-  
+sensor.hall_dimmer_alarm_level:
+  hidden: true
+sensor.hall_dimmer_alarm_type:
+  hidden: true
+sensor.hall_dimmer_exporting:
+  hidden: true
+sensor.hall_dimmer_sourcenodeid:
+  hidden: true
+switch.hall_dimmer_switch:
+  hidden: true
+sensor.vardagsrum_dimmer_alarm_level:
+  hidden: true
+sensor.vardagsrum_dimmer_alarm_type:
+  hidden: true
+sensor.vardagsrum_dimmer_exporting:
+  hidden: true
+sensor.vardagsrum_dimmer_sourcenodeid:
+  hidden: true
+switch.vardagsrum_dimmer_switch:
+  hidden: true
+sensor.koksbank_dimmer_alarm_level:
+  hidden: true
+sensor.koksbank_dimmer_alarm_type:
+  hidden: true
+sensor.koksbank_dimmer_exporting:
+  hidden: true
+sensor.koksbank_dimmer_sourcenodeid:
+  hidden: true
+switch.koksbank_dimmer_switch:
+  hidden: true
+sensor.koksbord_dimmer_alarm_level:
+  hidden: true
+sensor.koksbord_dimmer_alarm_type:
+  hidden: true
+sensor.koksbord_dimmer_exporting:
+  hidden: true
+sensor.koksbord_dimmer_sourcenodeid:
+  hidden: true
+switch.koksbord_dimmer_switch:
+  hidden: true
+sensor.kok_dimmer_alarm_level:
+  hidden: true
+sensor.kok_dimmer_alarm_type:
+  hidden: true
+sensor.kok_dimmer_exporting:
+  hidden: true
+sensor.kok_dimmer_sourcenodeid:
+  hidden: true
+switch.kok_dimmer_switch:
+  hidden: true
+sensor.sovrum_dimmer_alarm_level:
+  hidden: true
+sensor.sovrum_dimmer_alarm_type:
+  hidden: true
+sensor.sovrum_dimmer_exporting:
+  hidden: true
+sensor.sovrum_dimmer_sourcenodeid:
+  hidden: true
+switch.sovrum_dimmer_switch:
+  hidden: true
+script.good_night:
+  order: 1
+group.vardagsrum:
+  order: 2
