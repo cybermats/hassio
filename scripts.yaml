@@ -1,6 +1,132 @@
 good_night:
   alias: Good night
   sequence:
-  - data: {}
-    service: light.turn_off
+  - service: light.turn_off
   - service: media_player.media_pause
+dim_study:
+  alias: Dim in Study
+  sequence:
+  - condition: numeric_state
+    entity_id: light.arbetsrum_taklampa_dimmer_level
+    value_template: "{% if states.light.arbetsrum_taklampa_dimmer_level.state == 'on'\
+      \  %}\n {{ states.light.arbetsrum_taklampa_dimmer_level.attributes.brightness\
+      \ }}\n{% else %}\n 0\n{% endif %}"
+    above: 10
+  - service: light.turn_on
+    data:
+      entity_id: light.arbetsrum_taklampa_dimmer_level
+      brightness: 10
+dim_hallway:
+  alias: Dim in Hallway
+  sequence:
+  - condition: or
+    conditions:
+    - condition: numeric_state
+      entity_id: light.hall_dimmer_level
+      value_template: "{% if states.light.hall_dimmer_level.state == 'on'  %}\n {{\
+        \ states.light.hall_dimmer_level.attributes.brightness }}\n{% else %}\n 0\n\
+        {% endif %}"
+      above: 96
+    - condition: numeric_state
+      entity_id: light.hall
+      value_template: "{% if states.light.hall.state == 'on'  %}\n {{ states.light.hall.attributes.brightness\
+        \ }}\n{% else %}\n 0\n{% endif %}"
+      above: 77
+  - service: light.turn_on
+    data:
+      entity_id: light.hall_dimmer_level
+      brightness: 96
+  - service: light.turn_on
+    data:
+      entity_id: light.hall
+      profile: dimmed
+      transition: 60
+dim_livingroom:
+  alias: Dim in Living Room
+  sequence:
+  - condition: numeric_state
+    entity_id: light.living_room
+    value_template: "{% if states.light.living_room.state == 'on'  %}\n {{ states.light.living_room.attributes.brightness\
+      \ }}\n{% else %}\n 0\n{% endif %}"
+    above: 77
+  - service: light.turn_on
+    data:
+      entity_id: light.living_room
+      profile: dimmed
+      transition: 60
+  - service: light.turn_off
+    data:
+      entity_id: light.vardagsrum_dimmer_level
+dim_kitchen:
+  alias: Dim in Kitchen
+  sequence:
+  - condition: or
+    conditions:
+    - condition: numeric_state
+      entity_id: light.kok_dimmer_level
+      value_template: "{% if states.light.kok_dimmer_level.state == 'on'  %}\n {{\
+        \ states.light.kok_dimmer_level.attributes.brightness }}\n{% else %}\n 0\n\
+        {% endif %}"
+      above: 96
+    - condition: numeric_state
+      entity_id: light.koksbank_dimmer_level
+      value_template: "{% if states.light.koksbank_dimmer_level.state == 'on'  %}\n\
+        \ {{ states.light.koksbank_dimmer_level.attributes.brightness }}\n{% else\
+        \ %}\n 0\n{% endif %}"
+      above: 96
+  - service: light.turn_off
+    data:
+      entity_id: light.kok_dimmer_level
+  - service: light.turn_on
+    data:
+      entity_id: light.koksbank_dimmer_level
+      brightness: 96
+dim_diningarea:
+  alias: Dim in Dining Area
+  sequence:
+  - condition: numeric_state
+    entity_id: light.koksbord_dimmer_level
+    value_template: "{% if states.light.koksbord_dimmer_level.state == 'on'  %}\n\
+      \ {{ states.light.koksbord_dimmer_level.attributes.brightness }}\n{% else %}\n\
+      \ 0\n{% endif %}"
+    above: 77
+  - service: light.turn_on
+    data:
+      entity_id: light.koksbord_dimmer_level
+      brightness: 96
+dim_bedroom:
+  alias: Dim in Bedroom
+  sequence:
+  - condition: numeric_state
+    entity_id: light.sovrum_dimmer_level
+    value_template: "{% if states.light.sovrum_dimmer_level.state == 'on'  %}\n {{\
+      \ states.light.sovrum_dimmer_level.attributes.brightness }}\n{% else %}\n 0\n\
+      {% endif %}"
+    above: 77
+  - service: light.turn_on
+    data:
+      entity_id: light.sovrum_dimmer_level
+      brightness: 96
+dim_apartment:
+  alias: Dim Apartment
+  sequence:
+  - service: script.dim_study
+  - service: script.dim_hallway
+  - service: script.dim_livingroom
+  - service: script.dim_kitchen
+  - service: script.dim_diningarea
+  - service: script.dim_bedroom
+light_up_apartment:
+  alias: Light all apartment
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.arbetsrum_taklampa_dimmer_level
+          - light.hall_dimmer_level
+          - light.koksbord_dimmer_level
+          - light.koksbank_dimmer_level
+          - light.sovrum_dimmer_level
+          - light.hallway
+          - light.living_room
+        profile: "bright"
