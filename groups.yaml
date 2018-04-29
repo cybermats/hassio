@@ -1,7 +1,103 @@
-inhabitants:
-    name: Inhabitants
-    view: yes
-    entities:
-     - device_tracker.galaxys8
-     - device_tracker.matssiphone
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - script.good_night
+    - group.arbetsrum
+    - group.hall
+    - group.kok
+    - group.vardagsrum
+    - group.sovrum
+
+alla_lampor:
+  name: Alla lampor
+  view: yes
+  icon: mdi:lamp
+  entities:
+    - light.arbetsrum_taklampa_dimmer_level
+    - light.sovrum_dimmer_level
+    - light.living_room
+    - light.vardagsrum_dimmer_level
+    - light.kok_dimmer_level
+    - light.koksbank_dimmer_level
+    - light.koksbord_dimmer_level
+    - light.hall_dimmer_level
+    - light.hall_hoger
+    - light.hall_vanster
   
+inhabitants:
+  name: Inhabitants
+  view: no
+  entities:
+    - device_tracker.galaxys8
+    - device_tracker.matspixel2
+
+sensors:
+  name: "Sensors"
+  view: yes
+  entities:
+    - sensor.bed_mats
+    - sensor.bed_mikael
+    - binary_sensor.bed_mats_occupied
+    - binary_sensor.bed_mikael_occupied
+    - device_tracker.galaxys8
+    - device_tracker.matspixel2
+    - binary_sensor.everyone_in_bed
+    - binary_sensor.mats
+    - binary_sensor.mikael
+    - binary_sensor.mats_in_bed
+    
+    
+zwave:
+  name: Z Wave Devices
+  view: yes
+  entities:
+    - zwave.arbetsrum_taklampa_dimmer
+    - zwave.balkong_ljusslinga_switch
+    - zwave.hall_dimmer
+    - zwave.kok_dimmer
+    - zwave.koksbank_dimmer
+    - zwave.koksbord_dimmer
+    - zwave.sovrum_dimmer
+    - zwave.sovrum_gardin
+    - zwave.sovrum_gardin_button
+    - zwave.vardagsrum_dimmer
+    - zwave.vardagsrum_switch
+    - zwave.ytterdorr
+    - zwave.zwave_hub
+    
+arbetsrum:
+  name: Arbetsrum
+  entities:
+    - light.arbetsrum_taklampa_dimmer_level
+    - media_player.pulse_mini_study
+
+sovrum:
+  name: Sovrum
+  entities:
+    - cover.sovrum_gardin_switch
+    - cover.sovrum_gardin_level
+    - light.sovrum_dimmer_level
+
+vardagsrum:
+  name: Vardagsrum
+  entities:
+    - media_player.living_room_tv
+    - media_player.powernode_living_room
+    - light.living_room
+    - light.vardagsrum_dimmer_level
+
+kok:
+  name: Kök
+  entities:
+    - light.kok_dimmer_level
+    - light.koksbank_dimmer_level
+    - light.koksbord_dimmer_level
+
+hall:
+  name: Hall
+  entities:
+    - light.hall_dimmer_level
+    - light.hall_hoger
+    - light.hall_vanster
+
