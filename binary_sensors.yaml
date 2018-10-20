@@ -1,15 +1,17 @@
- - platform: template
-   sensors:
-     bed_mats_occupied:
-       friendly_name: "Bed Mats is occupied"
-       value_template: "{{ states('sensor.bed_mats')|float > 500 }}"
-       device_class: occupancy
- - platform: template
-   sensors:
-     bed_mikael_occupied:
-       friendly_name: "Bed Mikael is occupied"
-       value_template: "{{ states('sensor.bed_mikael')|float > 500 }}"
-       device_class: occupancy
+ - platform: mqtt
+   state_topic: "sensor/bedoccupancy"
+   name: 'Bed Mats Occupied'
+   value_template: '{{ value_json.data[0] }}'
+   payload_on: "1"
+   payload_off: "0"
+   device_class: occupancy
+ - platform: mqtt
+   state_topic: "sensor/bedoccupancy"
+   name: 'Bed Mikael Occupied'
+   value_template: '{{ value_json.data[1] }}'
+   payload_on: "1"
+   payload_off: "0"
+   device_class: occupancy
  - platform: template
    sensors:
      everyone_in_bed:

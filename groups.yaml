@@ -1,4 +1,4 @@
-default_view:
+default_view_test:
   view: yes
   icon: mdi:home
   entities:
@@ -29,23 +29,22 @@ inhabitants:
   name: Inhabitants
   view: no
   entities:
-    - device_tracker.galaxys8
+    - device_tracker.mikaelsiphone
     - device_tracker.matspixel2
 
 sensors:
   name: "Sensors"
   view: yes
   entities:
-    - sensor.bed_mats
-    - sensor.bed_mikael
     - binary_sensor.bed_mats_occupied
     - binary_sensor.bed_mikael_occupied
+    - binary_sensor.everyone_in_bed
     - device_tracker.galaxys8
     - device_tracker.matspixel2
-    - binary_sensor.everyone_in_bed
     - binary_sensor.mats
     - binary_sensor.mikael
-    - binary_sensor.mats_in_bed
+    - sensor.outside_light
+    - sensor.outside_temp
     
     
 zwave:

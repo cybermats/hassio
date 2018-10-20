@@ -24,7 +24,7 @@ config:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
+  api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
   ssl_certificate: /etc/letsencrypt/live/gurkautomat.com/fullchain.pem
@@ -101,6 +101,8 @@ device_tracker:
    password: !secret unifi_password
    verify_ssl: false
    track_new_devices: false
+#   
+# - platform: owntracks
 
 media_player:
  - platform: webostv

@@ -10,64 +10,75 @@
   - data:
       entity_id: media_player.living_room
     service: media_player.media_pause
-- alias: TV On
-  id: tv_on
+- id: tv_on
+  alias: TV On
   trigger:
-  - platform: state
-    entity_id: media_player.living_room_tv
-    from: 'off'
+  - entity_id: media_player.living_room_tv
+    platform: state
+    to: playing
   action:
-  - service: media_player.select_source
-    data:
+  - data:
       entity_id: media_player.living_room
       source: Optisk källa
-- alias: TV On Sunset
-  id: tv_on_sunset
+    service: media_player.select_source
+- id: tv_on_sunset
+  alias: TV On Sunset
   trigger:
-  - platform: state
-    entity_id: media_player.living_room_tv
-    from: 'off'
+  - entity_id: media_player.living_room_tv
+    platform: state
+    to: playing
   condition:
-  - condition: sun
-    after: sunset
+  - after: sunset
     after_offset: '-1:00:00'
+    condition: sun
   action:
-  - service: hue.hue_activate_scene
-    data:
+  - data:
       group_name: Living room
       scene_name: Dimmed
-- alias: TV Off Sunset
-  id: tv_off_sunset
+    service: hue.hue_activate_scene
+- id: tv_off_sunset
+  alias: TV Off Sunset
   trigger:
-  - platform: state
-    entity_id: media_player.living_room_tv
-    to: 'off'
+  - entity_id: media_player.living_room_tv
+    from: playing
+    platform: state
   condition:
-    condition: and
-    conditions:
-    - condition: sun
-      after: sunset
-      after_offset: '-1:00:00'
-    - condition: time
-      after: '12:00:00'
-      before: 02:00:00
+  - after: sunset
+    after_offset: '-1:00:00'
+    condition: sun
+  - after: '12:00:00'
+    before: 02:00:00
+    condition: time
   action:
-  - service: hue.hue_activate_scene
-    data:
+  - data:
       group_name: Living room
       scene_name: Bright
+    service: hue.hue_activate_scene
 - alias: Sun set
   id: sun_set
   trigger:
-  - platform: sun
-    event: sunset
-    offset: -01:00:00
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+    below: 3.5
   condition:
     condition: state
     entity_id: group.inhabitants
     state: home
   action:
   - service: script.light_up_apartment
+  - service: light.turn_on
+    entity_id: light.balkong_light
+- alias: Sun Rise
+  id: sun_rise
+  trigger:
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+    above: 3.5
+  action:
+  - service: light.turn_off
+    entity_id: light.balkong_light
 - alias: Weekday dim
   id: weekday_dim
   trigger:
@@ -84,9 +95,6 @@
   - condition: state
     entity_id: group.inhabitants
     state: home
-  - condition: sun
-    after: sunset
-    after_offset: '-1:00:00'
   action:
   - service: script.dim_apartment
   - service: cover.close_cover
@@ -115,9 +123,10 @@
 - alias: Weekday morning Off
   id: weekday_morning_off
   trigger:
-  - platform: sun
-    event: sunrise
-    offset: +01:00:00
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+    above: 3.5
   condition:
   - condition: state
     entity_id: group.inhabitants
@@ -167,27 +176,20 @@
     entity_id: binary_sensor.ytterdorr_sensor
     to: 'on'
   condition:
-    condition: and
-    conditions:
-    - condition: state
-      entity_id: group.inhabitants
-      state: not_home
-      for:
-        minutes: 10
-    - condition: state
-      entity_id: group.alla_lampor
-      state: 'off'
-    - condition: or
-      conditions:
-      - condition: sun
-        after: sunset
-        after_offset: '-1:00:00'
-      - condition: sun
-        before: sunrise
-        before_offset: '1:00:00'
+  - condition: state
+    entity_id: group.inhabitants
+    state: not_home
+    for:
+      minutes: 10
+  - condition: state
+    entity_id: group.alla_lampor
+    state: 'off'
+  - condition: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+    below: 3.5
   action:
   - service: script.light_up_apartment
-    
 - alias: We are home
   id: coming_home
   trigger:
@@ -195,70 +197,45 @@
     entity_id: group.inhabitants
     to: 'on'
   condition:
-    condition: and
-    conditions:
-    - condition: state
-      entity_id: group.alla_lampor
-      state: 'off'
-    - condition: or
-      conditions:
-      - condition: sun
-        after: sunset
-        after_offset: '-1:00:00'
-      - condition: sun
-        before: sunrise
-        before_offset: '1:00:00'
+  - condition: state
+    entity_id: group.alla_lampor
+    state: 'off'
+  - condition: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+    below: 3.5
   action:
   - service: script.light_up_apartment
-    
-- alias: Balkong ljusslinga On
-  id: balkong_ljusslinga
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: -01:00:00
-  action:
-    service: light.turn_on
-    entity_id: light.balkong_light
-- alias: Balkong ljusslinga Off
-  id: balkong_ljusslinga
-  trigger:
-  - platform: sun
-    event: sunrise
-    offset: 01:00:00
-  action:
-    service: light.turn_off
-    entity_id: light.balkong_light
-- action:
-  - service: cover.close_cover
-  - data: {}
-    service: script.good_night
+- id: going_to_bed
   alias: Going To Bed
-  condition:
-  - after: '21:00'
-    before: '6:00'
-    condition: time
-  id: going_to_bed
   trigger:
   - entity_id: binary_sensor.everyone_in_bed
     platform: state
     to: 'on'
-- action:
-  - data:
-      entity_id: light.hall_dimmer_level
-      profile: dimmed
-    service: light.turn_on
-  alias: Night light
   condition:
-  - after: '0:30'
+  - after: '21:00'
     before: '6:00'
     condition: time
-  - condition: state
-    entity_id: light.hall_dimmer_level
-    state: 'off'
-  id: '1525009433643'
+  action:
+  - service: cover.close_cover
+  - data: {}
+    service: script.good_night
+- id: night_light
+  alias: Night light
   trigger:
   - entity_id: binary_sensor.everyone_in_bed
     from: 'on'
     platform: state
     to: 'off'
+  condition:
+  - after: 0:30
+    before: '6:00'
+    condition: time
+  - condition: state
+    entity_id: light.hall_dimmer_level
+    state: 'off'
+  action:
+  - data:
+      entity_id: light.hall_dimmer_level
+      profile: dimmed
+    service: light.turn_on
