@@ -234,10 +234,10 @@
     entity_id: light.hall_dimmer_level
     state: 'off'
   action:
-  - data:
-      brightness: 18
-      entity_id: light.hall_dimmer_level
-    service: light.turn_on
+  - service: light.turn_on
+    data:
+      entity_id: light.hallway
+      profile: night
 - id: '1540132430948'
   alias: Daily z-wave healing
   trigger:
