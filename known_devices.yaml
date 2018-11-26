@@ -5,7 +5,7 @@ matssiphone:
   mac: 38:71:DE:AD:D2:4F
   name: Matss-iPhone
   picture:
-  track: true
+  track: false
   vendor: Apple, Inc.
 
 galaxys8:
@@ -393,14 +393,6 @@ mats_pixel_2:
   name: mats
   picture:
   track: false
-
-mats_phone:
-  hide_if_away: false
-  icon:
-  mac:
-  name: mats
-  picture:
-  track: true
 
 iphonejobb:
   hide_if_away: false

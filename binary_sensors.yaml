@@ -61,4 +61,4 @@
      mikael:
        friendly_name: "Mikael"
        device_class: presence
-       value_template: "{{ is_state('device_tracker.galaxys8', 'home') }}"
+       value_template: "{{ is_state('device_tracker.mikaelsiphone', 'home') }}"
