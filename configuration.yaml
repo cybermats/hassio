@@ -22,6 +22,11 @@ frontend:
 # Enables configuration UI
 config:
 
+recorder:
+  db_url: !secret db_url
+  purge_interval: 0
+    
+  
 http:
   # Secrets are defined in the file secrets.yaml
   api_password: !secret http_password

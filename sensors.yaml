@@ -3,6 +3,7 @@
     state_topic: "sensor/outside"
     name: "Outside light"
     value_template: "{{ value_json.data.light }}"
+    unit_of_measurement: 'light'
   - platform: mqtt
     state_topic: "sensor/outside"
     name: "Outside Temp"

@@ -20,3 +20,6 @@ OZW_Log.txt
 known_devices.yaml
 
 *.xml
+
+\.storage/
+deps/

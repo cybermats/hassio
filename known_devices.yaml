@@ -1065,3 +1065,59 @@ ecfabc05a826:
   name: ecfabc05a826
   picture:
   track: false
+
+'368805473434':
+  hide_if_away: false
+  icon:
+  mac: 36:88:05:47:34:34
+  name: '368805473434'
+  picture:
+  track: false
+
+48a29e143bbc:
+  hide_if_away: false
+  icon:
+  mac: 48:A2:9E:14:3B:BC
+  name: 48a29e143bbc
+  picture:
+  track: false
+
+a8cb83e98bb6:
+  hide_if_away: false
+  icon:
+  mac: A8:CB:83:E9:8B:B6
+  name: a8cb83e98bb6
+  picture:
+  track: false
+
+a8cb83e9063e:
+  hide_if_away: false
+  icon:
+  mac: A8:CB:83:E9:06:3E
+  name: a8cb83e9063e
+  picture:
+  track: false
+
+galaxys9:
+  hide_if_away: false
+  icon:
+  mac: 08:C5:E1:17:62:FD
+  name: Galaxy-S9
+  picture:
+  track: false
+
+iphonehem:
+  hide_if_away: false
+  icon:
+  mac: 98:10:E8:2A:53:96
+  name: iPhone-hem
+  picture:
+  track: false
+
+a8cb83e91787:
+  hide_if_away: false
+  icon:
+  mac: A8:CB:83:E9:17:87
+  name: a8cb83e91787
+  picture:
+  track: false

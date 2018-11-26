@@ -17,6 +17,11 @@ dim_study:
     data:
       entity_id: light.arbetsrum_taklampa_dimmer_level
       brightness: 10
+  - service: light.turn_on
+    data:
+      entity_id: light.office
+      profile: dimmed
+      transition: 10
 dim_hallway:
   alias: Dim in Hallway
   sequence:
@@ -130,4 +135,5 @@ light_up_apartment:
           - light.sovrum_dimmer_level
           - light.hallway
           - light.living_room
+          - light.office
         profile: "bright"
