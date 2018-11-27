@@ -1,13 +1,20 @@
-default_view_test:
+default_view:
   view: yes
   icon: mdi:home
   entities:
-    - script.good_night
-    - group.arbetsrum
-    - group.hall
-    - group.kok
-    - group.vardagsrum
-    - group.sovrum
+    - sensor.yr_symbol
+    - binary_sensor.bed_mats_occupied
+    - binary_sensor.bed_mikael_occupied
+    - binary_sensor.everyone_in_bed
+    - device_tracker.galaxys8
+    - device_tracker.matspixel2
+    - binary_sensor.mats
+    - binary_sensor.mikael
+    - sensor.outside_light
+    - sensor.outside_temp
+    - group.all_lights
+    - group.all_automations
+    - group.all_scripts
 
 alla_lampor:
   name: Alla lampor
@@ -29,12 +36,11 @@ inhabitants:
   name: Inhabitants
   view: no
   entities:
-    - device_tracker.mikaelsiphone
-    - device_tracker.matspixel2
+    - binary_sensor.mats
+    - binary_sensor.mikael
 
 sensors:
   name: "Sensors"
-  view: yes
   entities:
     - binary_sensor.bed_mats_occupied
     - binary_sensor.bed_mikael_occupied
@@ -49,7 +55,7 @@ sensors:
     
 zwave:
   name: Z Wave Devices
-  view: yes
+  view: no
   entities:
     - zwave.arbetsrum_taklampa_dimmer
     - zwave.balkong_ljusslinga_switch
@@ -64,6 +70,13 @@ zwave:
     - zwave.vardagsrum_switch
     - zwave.ytterdorr
     - zwave.zwave_hub
+
+zwave_overview:
+  name: Z Wave
+  view: yes
+  entities:
+    - group.zwave
+    - group.dimmers
     
 arbetsrum:
   name: Arbetsrum
@@ -114,3 +127,53 @@ scripts:
     - script.dim_bedroom
     - script.dim_apartment
     - script.light_up_apartment
+
+dimmers:
+  name: Dimmers
+  view: no
+  entities:
+    - sensor.arbetsrum_taklampa_dimmer_energy
+    - sensor.arbetsrum_taklampa_dimmer_power
+    - sensor.arbetsrum_taklampa_dimmer_power_management
+    
+    - sensor.hall_dimmer_energy
+    - sensor.hall_dimmer_power
+    - sensor.hall_dimmer_power_management
+    
+    - sensor.kok_dimmer_energy
+    - sensor.kok_dimmer_power
+    - sensor.kok_dimmer_power_management
+
+    - sensor.koksbord_dimmer_energy
+    - sensor.koksbord_dimmer_power
+    - sensor.koksbord_dimmer_power_management
+
+    - sensor.vardagsrum_dimmer_energy
+    - sensor.vardagsrum_dimmer_power
+    - sensor.vardagsrum_dimmer_power_management
+
+    - sensor.sovrum_dimmer_energy
+    - sensor.sovrum_dimmer_power
+    - sensor.sovrum_dimmer_power_management
+
+    - sensor.koksbank_dimmer_energy
+    - sensor.koksbank_dimmer_heat
+    - sensor.koksbank_dimmer_power
+    - sensor.koksbank_dimmer_power_2
+    - sensor.koksbank_dimmer_power_management
+    - sensor.koksbank_dimmer_system
+    
+    - sensor.sovrum_gardin_energy
+    - sensor.sovrum_gardin_power
+    - sensor.sovrum_gardin_previous_reading
+    - sensor.sovrum_gardin_previous_reading_2
+
+media:
+  name: "Media"
+  view: yes
+  entities:
+    - media_player.chromecastultra4626
+    - media_player.living_room_tv
+    - media_player.powernode_living_room
+    - media_player.pulse_flex_bathroom
+    - media_player.pulse_mini_study
