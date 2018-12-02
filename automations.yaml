@@ -231,7 +231,7 @@
     before: '6:00'
     condition: time
   - condition: state
-    entity_id: light.hall_dimmer_level
+    entity_id: light.hallway
     state: 'off'
   action:
   - service: light.turn_on
@@ -246,3 +246,5 @@
   condition: []
   action:
   - service: zwave.heal_network
+
+    
