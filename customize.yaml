@@ -37,9 +37,9 @@ light.bokhyllan_vanster:
 light.bredvid_soffan:
   hidden: true
 light.bedroom:
-  friendly_name: Sovrum
+  friendly_name: "Sovrum"
 light.living_room:
-  friendly_name: Vardagsrum
+  friendly_name: "Vardagsrum"
 switch.sovrum_gardin_switch:
   hidden: true
 cover.sovrum_gardin_switch:
@@ -108,9 +108,3 @@ script.good_night:
   order: 1
 group.vardagsrum:
   order: 2
-group.all_lights:
-  hidden: false
-  friendly_name: "Lampor"
-group.all_automations:
-  hidden: false
-  friendly_name: "Automations"

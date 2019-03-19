@@ -2,8 +2,8 @@
   alias: Everyone has left
   trigger:
   - entity_id: group.inhabitants
+    from: 'on'
     platform: state
-    to: not_home
   action:
   - data: {}
     service: light.turn_off
@@ -64,7 +64,7 @@
   condition:
     condition: state
     entity_id: group.inhabitants
-    state: home
+    state: 'on'
   action:
   - service: script.light_up_apartment
   - service: light.turn_on
@@ -94,7 +94,7 @@
     - thu
   - condition: state
     entity_id: group.inhabitants
-    state: home
+    state: on
   action:
   - service: script.dim_apartment
   - service: cover.close_cover
@@ -130,13 +130,13 @@
   condition:
   - condition: state
     entity_id: group.inhabitants
-    state: home
+    state: on
   action:
   - service: light.turn_off
 - id: wake_up
   alias: Wake up
   trigger:
-  - at: '8:00'
+  - at: '7:30'
     platform: time
   condition:
   - condition: time
@@ -148,7 +148,7 @@
     - fri
   - condition: state
     entity_id: group.inhabitants
-    state: home
+    state: on
   action:
   - data:
       entity_id: cover.sovrum_gardin_level
@@ -159,7 +159,8 @@
       brightness: 100
       entity_id: light.sovrum_dimmer_level
     service: light.turn_on
-  - delay: '[object Object]'
+  - delay:
+      minutes: 5
   - data:
       entity_id:
       - light.sovrum_dimmer_level
@@ -177,7 +178,7 @@
   condition:
   - condition: state
     entity_id: group.inhabitants
-    state: not_home
+    state: off
     for:
       minutes: 10
   - condition: state
@@ -246,5 +247,3 @@
   condition: []
   action:
   - service: zwave.heal_network
-
-    

@@ -105,7 +105,7 @@ device_tracker:
    username: serviceaccount
    password: !secret unifi_password
    verify_ssl: false
-   track_new_devices: false
+   track_new_devices: True
    new_device_defaults:
       track_new_devices: False
       hide_if_away: False
