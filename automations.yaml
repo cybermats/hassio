@@ -94,7 +94,7 @@
     - thu
   - condition: state
     entity_id: group.inhabitants
-    state: on
+    state: 'on'
   action:
   - service: script.dim_apartment
   - service: cover.close_cover
@@ -130,7 +130,7 @@
   condition:
   - condition: state
     entity_id: group.inhabitants
-    state: on
+    state: 'on'
   action:
   - service: light.turn_off
 - id: wake_up
@@ -148,7 +148,7 @@
     - fri
   - condition: state
     entity_id: group.inhabitants
-    state: on
+    state: 'on'
   action:
   - data:
       entity_id: cover.sovrum_gardin_level
@@ -178,7 +178,7 @@
   condition:
   - condition: state
     entity_id: group.inhabitants
-    state: off
+    state: 'off'
     for:
       minutes: 10
   - condition: state
