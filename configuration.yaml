@@ -90,8 +90,8 @@ light:
          entity_id: switch.balkong_ljusslinga_switch_switch
        value_template:
          "{{ is_state('switch.balkong_ljusslinga_switch_switch', 'on') }}"
-     living_room_switch_light:
-       friendly_name: "Vardagsrum switch"
+     bedroom_switch_light:
+       friendly_name: "Sovrum switch"
        turn_on:
          service: switch.turn_on
          entity_id: switch.vardagsrum_switch_switch
